@@ -1038,7 +1038,7 @@ export default function HomePage() {
                   )}
 
                   {/* After card (without buttons now) */}
-                  {scenario !== "none" && (
+                  
                     <div
                       className="rounded-2xl px-3 py-3"
                       style={{
@@ -1133,7 +1133,7 @@ export default function HomePage() {
                         </>
                       )}
                     </div>
-                  )}
+                  
                 </div>
 
                 {/* BUTTONS BELOW BOTH CARDS */}
