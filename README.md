@@ -14,5 +14,7 @@ If I had more time, I would scale my app to make it more realistic, and for that
 10.	Connecting to a real database is required so that we can estimate the costs in real time
 11.	other than the damage class and severity, we should check the damage size and this will need estimation on the size of the car and for that we can either refer to the rental owner, or take always the car image from the rental owner with a reference object so that we can scale, or simply refer to the additional information given in the CSV
 12.	(VERY OPTIONAL AND ONLY BECAUSE I WORK IN 3D RECONSTRUCTION), we can build a 3D model out of the 5 views and compare both models to know the damages added.
+
 You can check my demo here: https://youtu.be/t0WDqQFUAH4
+
 If you wish to try the demo yourself, here are the weights that should be added in ai-backend (same level as main.py): https://drive.google.com/drive/folders/1xvFl1R6eh_6lO4xMlpYx4ToBF3wgdBxE?usp=sharing
