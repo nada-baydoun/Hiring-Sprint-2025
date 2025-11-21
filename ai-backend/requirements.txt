@@ -5,3 +5,6 @@ tensorflow
 pillow
 opencv-python-headless
 python-multipart
+torch
+numpy
+gdown
