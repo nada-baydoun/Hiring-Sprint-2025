@@ -14,15 +14,34 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras.applications.efficientnet import preprocess_input as eff_preprocess
 
+from pathlib import Path 
+import gdown
+
 # =========================
 # 1) CONFIG
 # =========================
+YOLO_URL = os.getenv( "YOLO_URL", "https://drive.google.com/uc?export=download&id=1hPMULEvUsfUI_oHQrJkOEqTKBwyt-mtP", ) 
+SEVERITY_URL = os.getenv( "SEVERITY_URL", "https://drive.google.com/uc?export=download&id=1Kyt705LQRpRR1JIcrIIOsuIx6MlTBt-Z", )
 
-YOLO_WEIGHTS_PATH = "yolo11-seg-car-damage.pt"          # put .pt here
-SEVERITY_MODEL_PATH = "severity_efficientnetb0_kaggle.h5"  # put .h5 here
+YOLO_WEIGHTS_PATH = "yolo11-seg-car-damage.pt"          
+SEVERITY_MODEL_PATH = "severity_efficientnetb0_kaggle.h5"  
 
 IMG_SIZE = (224, 224)
 SEVERITY_CLASSES = ["minor", "moderate", "severe"]
+
+def ensure_file(path: str, url: str):
+    """
+    If `path` does not exist, download it from `url`.
+    """
+    p = Path(path)
+    if p.exists():
+        print(f"{path} already exists, skipping download.")
+        return
+
+    print(f"Downloading {path} from {url} ...", flush=True)
+    gdown.download(url, str(p), quiet=False)
+
+    print(f"Downloaded {path}", flush=True)
 
 # =========================
 # 2) FASTAPI APP
@@ -41,6 +60,8 @@ app.add_middleware(
 # =========================
 # 3) LOAD MODELS ONCE
 # =========================
+ensure_file(YOLO_WEIGHTS_PATH, YOLO_URL)
+ensure_file(SEVERITY_MODEL_PATH, SEVERITY_URL)
 
 print("Loading YOLO model...")
 yolo_model = YOLO(YOLO_WEIGHTS_PATH)
